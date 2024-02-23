@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: americanroutes-feed
+  name: americanroutes-feed
+spec:
+  ports:
+  - name: service
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: americanroutes-feed
+

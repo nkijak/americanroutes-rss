@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: americanroutes-feed
+  labels:
+    app: americanroutes-feed
+spec:
+  selector:
+    matchLabels:
+      app: americanroutes-feed
+  revisionHistoryLimit: 2
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: americanroutes-feed
+    spec:
+      containers:
+        - name: americanroutes
+          image: 'registry.kinnack.com/americanroutes:latest'
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP

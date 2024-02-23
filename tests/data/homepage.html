@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>American Routes</title>
+	<link media="all" rel="stylesheet" href="/ui/css/main.css?v8">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" defer></script>
+	<script>window.jQuery || document.write('<script src="/ui/js/jquery-1.12.4.min.js" defer><\/script>')</script>
+	<script src="/ui/js/mediaelement-and-player.min.js" defer></script>
+	<script src="/ui/js/ajaxify-history.js?v5" defer></script>
+	<script src="/ui/js/jquery.main.js?v10" defer></script>
+	<script src="/ui/js/modernizr-custom.js" defer></script>
+	<link rel="apple-touch-icon" sizes="57x57" href="/ui/favs/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/ui/favs/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/ui/favs/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/ui/favs/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/ui/favs/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/ui/favs/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/ui/favs/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/ui/favsapple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/ui/favs/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/ui/favs/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/ui/favs/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/ui/favs/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/ui/favs/favicon-16x16.png">
+	<link rel="manifest" href="/ui/favs/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff ">
+	<meta name="msapplication-TileImage" content="/ui/favs/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff ">
+</head>
+<body class="document-body">
+	<div id="wrapper">
+		<header id="header" class="homepage">
+			<div class="header-holder">
+				<div class="search-box">
+					<a href="javascript:;" class="search-opener no-ajaxy"><span class="icon-search"></span></a>
+					<div class="search-drop">
+						<form class="search-form" action="/archives/search" method="get">
+							<fieldset>
+								<a href="javascript:;" class="search-close"><span class="icon-search"></span></a>
+								<input type="search" name="terms" placeholder="SEARCH THE ARCHIVES">
+							</fieldset>
+						</form>
+					</div>
+				</div>
+				<div class="logo primary-logo is-hidden">
+					<a href="/"><img src="/ui/images/logo.png" alt="AMERICAN ROUTES"></a>
+				</div>
+				<div class="mini-player">
+					<div class="player-block" data-next-src="https://americanroutes.s3.amazonaws.com/shows/2313_02.mp3" data-next-title="March 29th, 2023 (Hour 2)">
+						<audio id="player">
+						  <source src="https://americanroutes.s3.amazonaws.com/shows/2313_01.mp3" type="audio/mpeg">
+						</audio>
+						<a href="javascript:;" class="song-info info-opener">
+							<span class="img-album">
+								<img id="current-album" src="http://americanroutes.wwno.org/images/shows/small/01marsalis-obit-mediumSquareAt3X-v2-1600115920-1679329297.jpg" alt="Ellis Marsalis Remembered: Family Memories &amp; Music With Branford, Wynton, Delfeayo and Jason Marsalis">
+							</span>
+							<span class="description">
+								<span id="current-title" class="title">Ellis Marsalis Remembered: Family Memories & Music With Branford, Wynton, Delfeayo and Jason Marsalis</span>
+								<time id="current-date" class="date" datetime="2023-03-29">March 29th, 2023 (Hour 1)</time>
+							</span>
+						</a>
+						<a href="javascript:;" class="info-close"></a>
+						<a href="javascript:;" class="play-pause-btn pause js-play-pauser"></a>
+					</div>
+					<div class="info-drop">
+						<div class="info-block">
+							<strong id="detail-current-title" class="text-title">Ellis Marsalis Remembered: Family Memories & Music With Branford, Wynton, Delfeayo and Jason&nbsp;Marsalis</strong>
+							<div id="detail-current-desc">
+								<p>There is no more recognizable family name in jazz from New Orleans and beyond than: Marsalis. We&#8217;re paying tribute to the late pianist <b>Ellis Marsalis Jr. </b>who passed of Covid-19 in April 2020, and to his musical sons <b>Branford</b> (saxophone), <b>Wynton</b> (trumpet), <b>Delfeayo</b> (trombone) and <b>Jason</b> (drums and vibraphone). The conversation ranges from coming of age in a family of musicians, with expectations of performing at the highest level, to the interplay of traditional and modern jazz in New Orleans. Previously unheard are Wynton&#8217;s remarkable memorial oration and a live set with youngest son <b>Jason Marsalis</b> playing the music of his late father. It&#8217;s the enduring and thriving musical legacy of the Marsalis family this week on American Routes.</p>							</div>
+						</div>
+						<div class="info-panel">
+							<a href="javascript:;" class="play-pause-btn pause js-play-pauser"></a>
+							<ul class="list-inline list-btns">
+								<li><a id="detail-current-link" href="/archives/show/1321/Ellis-Marsalis-Remembered-Family-Memories-Music-With-Branford-Wynton-Delfeayo-and-Jason-Marsalis" class="btn soft-pink">Info</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="navbar">
+					<div class="holder navbar-inner">
+						<nav id="nav">
+							<a href="#" class="nav-opener"><span></span></a>
+							<div class="nav-drop">
+								<ul class="navigation">
+									<li class="">
+										<a href="/about">ABOUT</a>
+									</li>
+									<li class="">
+										<a href="/best">BEST OF</a>
+									</li>
+									<li class="">
+										<a href="/archives/upcoming">UPCOMING</a>
+									</li>
+									<li class="">
+										<a href="/archives">ARCHIVE</a>
+									</li>
+									<li class="">
+										<a href="/support">SUPPORT</a>
+									</li>
+									<li class="">
+										<a href="/journal">JOURNAL</a>
+									</li>
+									<li class="">
+										<a href="/stations">STATIONS</a>
+									</li>
+									<li class="">
+										<a href="/media">MEDIA KIT</a>
+									</li>
+									<li class="">
+										<a href="/archives/by_letter">INDEX</a>
+									</li>
+									<li class="">
+										<a href="/staff">STAFF</a>
+									</li>
+									<li class="">
+										<a href="/contact">CONTACT</a>
+									</li>
+								</ul>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main>
+			<div class="intro-banner" style="background-image: url(/ui/images/img-texture-grey.png);">
+	<div class="holder">
+		<div class="cols">
+			<div class="col">
+				<div class="intro-block">
+					<div class="wrap">
+						<div class="img-logo"><a href="#"><img src="/ui/images/img-logo1.png" alt="AMERICAN ROUTES"></a></div>
+						<p><em>American Routes</em> is blues and jazz, gospel and soul, rockabilly and country, Cajun and swamp pop, Tejano, Latin&#8230;  and beyond. Songs and stories from musicians describe a deep and diverse nation with sounds and styles shared by all Americans. From the bayous to the beltways, from crossroads to crosstown, on interstates and city streets, turn up your radio for the sonic journey!</p>
+
+<p><strong>American Routes&#8212;produced in New Orleans since 1998</strong></p>						<ul class="btn-group">
+							<li><a href="/stations" class="btn">Find Your Station</a></li>
+							<li><a href="/support" class="btn">Donate</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<section class="visual-info hero-copy-wrap" style="background-image: url('http://americanroutes.wwno.org/images/shows/full/01marsalis-obit-mediumSquareAt3X-v2-1600115920-1679329297.jpg');">
+					<div class="block-wrap hero-copy">
+						<time datetime="2023-03-29"><strong>THIS WEEK</strong></time>
+						<h1 class="white">
+							<a href="/archives/show/1321/Ellis-Marsalis-Remembered-Family-Memories-Music-With-Branford-Wynton-Delfeayo-and-Jason-Marsalis">
+								Ellis Marsalis Remembered: Family Memories & Music With Branford, Wynton, Delfeayo and Jason&nbsp;Marsalis							</a>
+						</h1>
+						<div class="text-block">
+							<p>
+								There is no more recognizable family name in jazz from New Orleans and beyond than: Marsalis. We're paying tribute to the late pianist <b>Ellis Marsalis Jr. </b>who passed of Covid-19 in April 2020, and to his musical sons <b>Branford</b> (saxophone), <b>Wynton</b> (trumpet), <b>Delfeayo</b> (trombone) and <b>Jason</b> (drums and vibraphone). The conversation ranges from coming of&#8230; 
+								<a href="/archives/show/1321/Ellis-Marsalis-Remembered-Family-Memories-Music-With-Branford-Wynton-Delfeayo-and-Jason-Marsalis">read&nbsp;more</a>
+							</p>
+						</div>
+						<a href="javascript:;" class="btn-listen js-track-loader" data-type="show" data-hour="1" data-id="1321">
+							<div class="btn-wrap"><span>listen</span></div>
+						</a>
+					</div>
+				</section>
+			</div>
+			<div class="col">
+				<div class="row">
+					<div class="column">
+						<div class="music-block home-tile">
+							<div class="img-holder" style="background-image: url('http://americanroutes.wwno.org/images/shows/full/IMG_5598-1648653440-1679933194.jpeg');"></div>
+							<div class="caption">
+								<div class="wrap">
+									<span class="title">
+										<a href="/archives/show/1322/Easter-Parade-Passover-Music-for-Holy-Days-and-Holidays">
+											<strong>NEXT WEEK</strong> 
+										</a>
+									</span>
+									<time class="date" datetime="2023-04-05">Easter Parade & Passover: Music for Holy Days and Holidays</time>
+								</div>
+								<a href="/archives/show/1322/Easter-Parade-Passover-Music-for-Holy-Days-and-Holidays" class="link-more"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="column">
+						<div class="music-block home-tile">
+							<div class="img-holder" style="background-image: url('http://americanroutes.wwno.org/images/shows/full/kelsey_waldon4-1663088159-1663623877-1678896874.jpg');"></div>
+							<div class="caption light-brown">
+								<div class="wrap">
+									<span class="title">
+										<a href="/archives/show/1320/Reimagining-Kentucky-Country-Music-New-Orleans-Jazz-with-Kelsey-Waldon-and-Aurora-Nealand"><strong>LAST WEEK</strong></a>
+									</span>
+									<time class="date" datetime="2023-03-22">Reimagining Kentucky Country Music & New Orleans Jazz with Kelsey Waldon and Aurora Nealand</time>
+								</div>
+								<a href="/archives/show/1320/Reimagining-Kentucky-Country-Music-New-Orleans-Jazz-with-Kelsey-Waldon-and-Aurora-Nealand" class="link-more"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="info-container holder">
+	<div class="info-carousel">
+		<div class="mask">
+			<div class="slideset">
+									<article class="slide">
+						<div class="img-slide"><img src="http://americanroutes.wwno.org/images/artists/full/NS_Book_Fest-1679588558.jpeg" alt="Nick Spitzer and Brian Edwards at the New Orleans Book Festival at Tulane University"></div>
+						<div class="caption">
+							<ul class="list-inline list-links">
+								<li><a href="/pages/journal">ROUTES JOURNAL</a></li>
+								<!-- <li><a href="/pages/journal">UNDER THE HOOD</a></li> -->
+							</ul>
+							<h2><a href="/pages/journal/138/Nick-Spitzer-and-Brian-Edwards-at-the-New-Orleans-Book-Festival-at-Tulane-University">NICK SPITZER AND BRIAN EDWARDS AT THE NEW ORLEANS BOOK FESTIVAL AT TULANE&nbsp;UNIVERSITY</a></h2>
+							<div class="text-block">
+								<p></p>
+
+<p>American Routes: A Quarter Century of Oral Literacy &amp; Aural Tradition on Public Radio</p>
+
+<p>Nick Spitzer
+Moderator Brian Edwards</p>
+
+<p>This conversation was part of&#8230;</p>							</div>
+							<ul class="list-inline list-btns">
+								<!-- <li><a href="#" class="btn btn-default">Listen <span class="icon-play ico"></span></a></li> -->
+								<li><a href="/pages/journal/138/Nick-Spitzer-and-Brian-Edwards-at-the-New-Orleans-Book-Festival-at-Tulane-University" class="btn soft-pink">Read More</a></li>
+							</ul>
+						</div>
+					</article>
+									<article class="slide">
+						<div class="img-slide"><img src="http://americanroutes.wwno.org/images/artists/full/2023_Heritage_-Announcement-Collage_rec-1677622862.jpeg" alt="American Routes Host, Nick Spitzer, is the 2023 Recipient of the Bess Lomax Hawes National Heritage Fellowship"></div>
+						<div class="caption">
+							<ul class="list-inline list-links">
+								<li><a href="/pages/journal">ROUTES JOURNAL</a></li>
+								<!-- <li><a href="/pages/journal">UNDER THE HOOD</a></li> -->
+							</ul>
+							<h2><a href="/pages/journal/137/American-Routes-Host-Nick-Spitzer-is-the-2023-Recipient-of-the-Bess-Lomax-Hawes-National-Heritage-Fellowship">AMERICAN ROUTES HOST, NICK SPITZER, IS THE 2023 RECIPIENT OF THE BESS LOMAX HAWES NATIONAL HERITAGE&nbsp;FELLOWSHIP</a></h2>
+							<div class="text-block">
+								<p></p>
+
+<p>We are thrilled to announce that our host, Nick Spitzer, is the 2023 recipient of the Bess Lomax Hawes National Heritage Fellowship, presented in&#8230;</p>							</div>
+							<ul class="list-inline list-btns">
+								<!-- <li><a href="#" class="btn btn-default">Listen <span class="icon-play ico"></span></a></li> -->
+								<li><a href="/pages/journal/137/American-Routes-Host-Nick-Spitzer-is-the-2023-Recipient-of-the-Bess-Lomax-Hawes-National-Heritage-Fellowship" class="btn soft-pink">Read More</a></li>
+							</ul>
+						</div>
+					</article>
+									<article class="slide">
+						<div class="img-slide"><img src="http://americanroutes.wwno.org/images/artists/full/attachment-Huey-Piano-Smith-1676583988.jpeg" alt="Remembering Huey &quot;Piano&quot; Smith"></div>
+						<div class="caption">
+							<ul class="list-inline list-links">
+								<li><a href="/pages/journal">ROUTES JOURNAL</a></li>
+								<!-- <li><a href="/pages/journal">UNDER THE HOOD</a></li> -->
+							</ul>
+							<h2><a href="/pages/journal/136/Remembering-Huey-Piano-Smith">REMEMBERING HUEY "PIANO"&nbsp;SMITH</a></h2>
+							<div class="text-block">
+								<p>New Orleans pianist and early developer of rock &#8216;n&#8217; roll Huey &#8220;Piano&#8221; Smith passed away on Monday at age 89. </p>
+
+<p>While we unfortunately never had&#8230;</p>							</div>
+							<ul class="list-inline list-btns">
+								<!-- <li><a href="#" class="btn btn-default">Listen <span class="icon-play ico"></span></a></li> -->
+								<li><a href="/pages/journal/136/Remembering-Huey-Piano-Smith" class="btn soft-pink">Read More</a></li>
+							</ul>
+						</div>
+					</article>
+							</div>
+		</div>
+		<div class="btn-holder">
+			<a href="#" class="no-ajaxy btn-prev"><span class="icon-angle-left"></span></a>
+			<a href="#" class="no-ajaxy btn-next"><span class="icon-angle-right"></span></a>
+		</div>
+	</div>
+	<div class="newsletter-block">
+		<form class="newsletter-form" action="//publicradio.us2.list-manage.com/subscribe/post?u=ab54bc9a322e7adf0346f3879&id=3eaf1648ee" target="_blank" method="post">
+			<fieldset>
+				<div class="form-wrap">
+					<div class="col">
+						<span class="title">NEWSLETTER</span>
+						<span class="text-info">Get regular updates about our shows.</span>
+					</div>
+					<div class="col">
+						<div class="form-holder">
+							<input type="email" placeholder="Your Email" name="EMAIL">
+							<button class="btn btn-default" type="submit" class="ajaxy">Subscribe</button>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div class="info-aside">
+	<div class="columns">
+		<div class="column">
+			<section class="info-streams">
+				<h2 class="white">THE LATEST STREAMS</h2>
+				<ul class="list-unstyled list-streams">
+											<li>
+							<div class="text-block">
+								<time class="date" datetime="2023-03-29">March 29th, 2023</time>
+								<h3 class="white">
+									<a href="/archives/show/1321/Ellis-Marsalis-Remembered-Family-Memories-Music-With-Branford-Wynton-Delfeayo-and-Jason-Marsalis">
+										ELLIS MARSALIS REMEMBERED: FAMILY MEMORIES & MUSIC WITH BRANFORD, WYNTON, DELFEAYO AND JASON&nbsp;MARSALIS									</a>
+								</h3>
+							</div>
+							<div class="btn-holder">
+								<a href="javascript:;" class="btn soft-pink js-track-loader" data-id="1321" data-hour="1" data-type="show">
+									Listen <span class="icon-play ico"></span>
+								</a>
+							</div>
+						</li>
+											<li>
+							<div class="text-block">
+								<time class="date" datetime="2023-03-22">March 22nd, 2023</time>
+								<h3 class="white">
+									<a href="/archives/show/1320/Reimagining-Kentucky-Country-Music-New-Orleans-Jazz-with-Kelsey-Waldon-and-Aurora-Nealand">
+										REIMAGINING KENTUCKY COUNTRY MUSIC & NEW ORLEANS JAZZ WITH KELSEY WALDON AND AURORA&nbsp;NEALAND									</a>
+								</h3>
+							</div>
+							<div class="btn-holder">
+								<a href="javascript:;" class="btn soft-pink js-track-loader" data-id="1320" data-hour="1" data-type="show">
+									Listen <span class="icon-play ico"></span>
+								</a>
+							</div>
+						</li>
+											<li>
+							<div class="text-block">
+								<time class="date" datetime="2023-03-15">March 15th, 2023</time>
+								<h3 class="white">
+									<a href="/archives/show/1319/St-Patricks-Singers-Fiddlers-and-Pickers-from-Ireland-to-America">
+										ST. PATRICK'S SINGERS, FIDDLERS AND PICKERS FROM IRELAND TO&nbsp;AMERICA									</a>
+								</h3>
+							</div>
+							<div class="btn-holder">
+								<a href="javascript:;" class="btn soft-pink js-track-loader" data-id="1319" data-hour="1" data-type="show">
+									Listen <span class="icon-play ico"></span>
+								</a>
+							</div>
+						</li>
+									</ul>
+			</section>
+		</div>
+		<div class="column">
+			<section class="info-support">
+				<div class="img-logo"><a href="#"><img src="/ui/images/img-logo2.png" alt="A|R"></a></div>
+				<h2 class="gray-olive"></h2>
+								<ul class="list-unstyled btn-group">
+					<li><a href="/support" class="btn">Donate</a></li>
+				</ul>
+			</section>
+		</div>
+	</div>
+</div></div>
+<section class="info-artists" style="background-image: url(/ui/images/img-green-texture.jpg);">
+	<div class="holder">
+		<div class="info-title">
+			<h2 class="white"><small>DISCOVER MORE</small> THE AMERICAN ROUTES INDEX</h2>
+		</div>
+		<div class="artist-holder">
+							<div class="col">
+					<div class="artist-profile">
+						<img src="http://americanroutes.wwno.org/images/artists/full/Cleavell_web-1344440131.jpg" alt="Chuck Leavell">
+						<div class="caption">
+							<span class="name">Chuck Leavell</span>
+							<a href="/archives/artist/1313/Chuck-Leavell" class="btn btn-default green">Learn</a>
+						</div>
+					</div>
+				</div>
+							<div class="col">
+					<div class="artist-profile">
+						<img src="http://americanroutes.wwno.org/images/artists/full/AGhent.jpg" alt="Aubrey Ghent">
+						<div class="caption">
+							<span class="name">Aubrey Ghent</span>
+							<a href="/archives/artist/41/Aubrey-Ghent" class="btn btn-default green">Learn</a>
+						</div>
+					</div>
+				</div>
+							<div class="col">
+					<div class="artist-profile">
+						<img src="http://americanroutes.wwno.org/images/artists/full/Sun.jpg" alt="Marshall Grant and Sun Records">
+						<div class="caption">
+							<span class="name">Marshall Grant and Sun Records</span>
+							<a href="/archives/artist/760/Marshall-Grant-and-Sun-Records" class="btn btn-default green">Learn</a>
+						</div>
+					</div>
+				</div>
+							<div class="col">
+					<div class="artist-profile">
+						<img src="http://americanroutes.wwno.org/images/artists/full/TBenoit2010.jpg" alt="Tab Benoit">
+						<div class="caption">
+							<span class="name">Tab Benoit</span>
+							<a href="/archives/artist/1222/Tab-Benoit" class="btn btn-default green">Learn</a>
+						</div>
+					</div>
+				</div>
+					</div>
+	</div>
+</section>		</main>
+		<footer id="footer">
+			<div class="holder">
+				<div class="footer-holder">
+					<div class="col">
+						<div class="img-logo">
+							<a href="#">
+								<img src="/ui/images/logo1.png" alt="A|R AMERICAN ROUTES">
+							</a>
+						</div>
+					</div>
+					<div class="col">
+						<ul class="list-inline list-links">
+							<li><a href="/about">ABOUT</a></li>
+							<li><a href="/best">BEST OF</a></li>
+							<li><a href="/archives">ARCHIVE</a></li>
+							<li><a href="/archives/upcoming">UPCOMING</a></li>
+							<li><a href="/support">SUPPORT US</a></li>
+							<li><a href="/journal">JOURNAL</a></li>
+							<li><a href="/stations">STATIONS</a></li>
+							<li><a href="/staff">STAFF</a></li>
+							<li><a href="/contact">CONTACT</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer-frame">
+					<div class="col">
+						<ul class="list-inline list-logo">
+															<li>
+									<a href="http://www.tulane.edu" title="Tulane University">
+										<img src="http://americanroutes.wwno.org/images/artists/full/logo2-1517707337.png" alt="Tulane University">
+									</a>
+								</li>
+															<li>
+									<a href="https://www.arts.gov" title="NEA">
+										<img src="http://americanroutes.wwno.org/images/artists/full/2018-LogoBW-Horizontal-white-on-transparent-1566854720.png" alt="NEA">
+									</a>
+								</li>
+															<li>
+									<a href="https://www.prx.org" title="PRX">
+										<img src="http://americanroutes.wwno.org/images/artists/full/PRX_Marks_One_Color_Horizontal_Black-1526066923.png" alt="PRX">
+									</a>
+								</li>
+															<li>
+									<a href="https://notcf.com/" title="New Orleans Tourism and Cultural Fund">
+										<img src="http://americanroutes.wwno.org/images/artists/full/NOTCF_blackandwhite-removebg-preview-1662997377.png" alt="New Orleans Tourism and Cultural Fund">
+									</a>
+								</li>
+															<li>
+									<a href="" title="Jim Hart">
+										<img src="http://americanroutes.wwno.org/images/artists/full/Jim_Hart-removebg-preview-1664298304.png" alt="Jim Hart">
+									</a>
+								</li>
+													</ul>
+					</div>
+					<div class="col">
+						<ul class="list-inline social-networks">
+							<li><a href="https://twitter.com/americanroutes"><span class="icon-twitter"></span></a></li>
+							<li><a href="https://www.facebook.com/americanroutes/"><span class="icon-facebook"></span></a></li>
+							<li><a href="https://soundcloud.com/user-81495057"><span class="icon-soundcloud"></span></a></li>
+							<li><a href="https://www.instagram.com/americanroutes/"><span class="icon-instagram"></span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a8c580f4ea52d4c"></script>
+</body>
+</html>

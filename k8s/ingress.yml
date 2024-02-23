@@ -1,0 +1,23 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    app: americanroutes-feed
+  name: americanroutes-feed
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: kinnack.ddns.net
+    http:
+      paths:
+      - backend:
+          service:
+            name: americanroutes-feed  
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+

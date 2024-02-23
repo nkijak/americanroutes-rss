@@ -1,0 +1,9 @@
+*.pyc
+
+.vscode/
+no.python-version
+*.crt
+
+target/
+
+*.egg-info/
