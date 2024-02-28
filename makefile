@@ -1,11 +1,16 @@
 IMAGE?=registry.kinnack.com/americanroutes
 TAG?=latest
+BIN?=
+
+init:
+	pip install pipenv
+	pipenv install
 
 target/rss.xml: src/crawler/feed.py src/crawler/parser.py
-	python src/crawler/feed.py
+	${BIN}python src/crawler/feed.py
 
 serve: target/rss.xml
-	cd target && python -m http.server
+	cd target && ${BIN}python -m http.server
 
 docker-build: target/rss.xml
 	docker build -t ${IMAGE}:${TAG} .
