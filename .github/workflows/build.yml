@@ -15,7 +15,7 @@ jobs:
         id: restore-detail-files
         uses: actions/cache/restore@v4
         with:
-          path: target/show_data/
+          path: "target/show_data"
           key: ${{ hashFiles('target/show_data/**/*') }}
 
       - name: build
@@ -24,7 +24,7 @@ jobs:
       - name: save detail files
         uses: actions/cache/save@v4
         with:
-          path: target/show_data/
+          path: "target/show_data"
           key: ${{ steps.restore-detail-files.outputs.cache-primary-key }}
 
       - name: Connect Tailscale
