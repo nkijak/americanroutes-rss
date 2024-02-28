@@ -24,7 +24,7 @@ jobs:
           version: 1.52.0
 
       - name: push
-        run: make docker-push
+        run: make ci-config docker-push
 
       - name: restart
         run: make restart-app

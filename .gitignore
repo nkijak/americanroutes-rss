@@ -2,7 +2,6 @@
 
 .vscode/
 no.python-version
-*.crt
 
 target/
 

@@ -19,7 +19,7 @@ docker-run:
 	docker run --rm -p 8080:80 ${IMAGE}:${TAG}
 
 docker-push: docker-build
-	docker push ${IMAGE}:${TAG}
+	docker push --insecure-registry ${IMAGE}:${TAG}
 
 restart-app:
 	kubectl delete pods -l app=americanroutes-feed
@@ -28,5 +28,14 @@ get-feed:
 	curl -v http://kinnack.ddns.net/rss.xml
 
 deploy: docker-push restart-app
+
+docker-restart:
+	sudo service docker restart
+
+docker-config:
+	sudo mv ci/daemon.json /etc/docker/daemon.json
+
+ci-config: docker-config docker-restart
+
 
 .PHONY: serve deploy docker-push docker-build restart-app
