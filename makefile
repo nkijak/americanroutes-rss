@@ -9,6 +9,9 @@ init:
 target/rss.xml: src/crawler/feed.py src/crawler/parser.py
 	${BIN}python src/crawler/feed.py
 
+clean:
+	rm -q target/rss.xml
+
 serve: target/rss.xml
 	cd target && ${BIN}python -m http.server
 
@@ -19,7 +22,7 @@ docker-run:
 	docker run --rm -p 8080:80 ${IMAGE}:${TAG}
 
 docker-push: docker-build
-	docker push --insecure-registry ${IMAGE}:${TAG}
+	docker push ${IMAGE}:${TAG}
 
 restart-app:
 	kubectl delete pods -l app=americanroutes-feed
