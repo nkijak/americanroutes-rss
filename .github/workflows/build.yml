@@ -42,8 +42,8 @@ jobs:
       - name: push
         run: make ci-config docker-push
 
-      - name: Configure kubectl 
-        uses: tale/kubectl-action@1
+      - name: Kubernetes CLI (kubectl)
+        uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.K8S_CONFIG_B64 }}
 
