@@ -50,7 +50,7 @@ The songs and stories on American Routes describe both the community origins of 
 
 if __name__ == "__main__":
     months = [
-        dt for dt in rrule(MONTHLY, dtstart=datetime(2023, 11, 1), until=datetime.now())
+        dt for dt in rrule(MONTHLY, dtstart=datetime(2024, 1, 1), until=datetime.now())
     ]
 
     urls = [

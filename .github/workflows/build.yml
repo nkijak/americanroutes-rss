@@ -1,0 +1,49 @@
+name: Image Builder
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  schedule:
+    # wednesday 1249 UTC to avoid high loads
+    - cron: "49 12 * * 3"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: restore detail files
+        id: restore-detail-files
+        uses: actions/cache/restore@v4
+        with:
+          key: show-details
+          path: "target/show_data"
+
+      - name: build
+        run: make init docker-build BIN="pipenv run "
+
+      - name: save detail files
+        uses: actions/cache/save@v4
+        with:
+          key: ${{ steps.restore-detail-files.outputs.cache-primary-key }}
+          path: "target/show_data"
+
+      - name: Connect Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          #oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          #oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          authkey: ${{ secrets.TS_AUTH_KEY }}
+          tags: "tag:ci"
+          version: 1.52.0
+
+      - name: push
+        run: make ci-config docker-push
+
+      - name: Kubernetes CLI (kubectl)
+        uses: tale/kubectl-action@v1
+        with:
+          base64-kube-config: ${{ secrets.K8S_CONFIG_B64 }}
+
+      - name: restart
+        run: make restart-app

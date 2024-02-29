@@ -1,11 +1,19 @@
 IMAGE?=registry.kinnack.com/americanroutes
 TAG?=latest
+BIN?=
+
+init:
+	pip install pipenv
+	pipenv install
 
 target/rss.xml: src/crawler/feed.py src/crawler/parser.py
-	python src/crawler/feed.py
+	${BIN}python src/crawler/feed.py
+
+clean:
+	rm -q target/rss.xml
 
 serve: target/rss.xml
-	cd target && python -m http.server
+	cd target && ${BIN}python -m http.server
 
 docker-build: target/rss.xml
 	docker build -t ${IMAGE}:${TAG} .
@@ -23,5 +31,14 @@ get-feed:
 	curl -v http://kinnack.ddns.net/rss.xml
 
 deploy: docker-push restart-app
+
+docker-restart:
+	sudo service docker restart
+
+docker-config:
+	sudo mv ci/daemon.json /etc/docker/daemon.json
+
+ci-config: docker-config docker-restart
+
 
 .PHONY: serve deploy docker-push docker-build restart-app
