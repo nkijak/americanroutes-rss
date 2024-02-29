@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule:
-    # wednesday 1300 UTC?
-    cron: "0 13 * * 3"
+    # wednesday 1249 UTC to avoid high loads
+    - cron: "49 12 * * 3"
 jobs:
   build:
     runs-on: ubuntu-latest
