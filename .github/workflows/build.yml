@@ -3,8 +3,6 @@ on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   schedule:
     # wednesday 1249 UTC to avoid high loads
     - cron: "49 12 * * 3"
