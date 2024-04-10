@@ -32,7 +32,21 @@ def test_parse_show_details():
     expected = parser.Episode(
         "Making Music on Records & Excavating Shellac",
         description="We're spinning jazz, country, blues, pop and roots music heard locally and globally for over a century on records and later on jukeboxes, in cafes, barrooms and juke joints. We'll hear June Carter and Johnny Cash, New Orleans' jazzmen Kermit Ruffins and Danny Barker, Robert Johnson, and the Rolling Stones...then and now. Plus we'll travel the world from earlier in the 20th century in search of rare music on 78s as dug up by sonic researcher, <b>Jonathan Ward</b>, for his collection, \"Excavated Shellac: An Alternate History of the Worlds Music.\"\n",
-        date=datetime(2024, 1, 24, tzinfo=TZINFO),
+        date=datetime(2024, 1, 24, 1, tzinfo=TZINFO),
+        media_url="https://americanroutes.s3.amazonaws.com/shows/2404_01.mp3",
+        url="http://americanroutes.wwno.org/archives/show/1368/",
+    )
+    assert actual == expected
+
+
+def test_parse_show_guesses_url():
+    with open("tests/data/show_detail.json") as raw:
+        details = json.load(raw)
+    actual = parser.parse_show_details(details, 1)
+    expected = parser.Episode(
+        "Making Music on Records & Excavating Shellac",
+        description="We're spinning jazz, country, blues, pop and roots music heard locally and globally for over a century on records and later on jukeboxes, in cafes, barrooms and juke joints. We'll hear June Carter and Johnny Cash, New Orleans' jazzmen Kermit Ruffins and Danny Barker, Robert Johnson, and the Rolling Stones...then and now. Plus we'll travel the world from earlier in the 20th century in search of rare music on 78s as dug up by sonic researcher, <b>Jonathan Ward</b>, for his collection, \"Excavated Shellac: An Alternate History of the Worlds Music.\"\n",
+        date=datetime(2024, 1, 24, 1, tzinfo=TZINFO),
         media_url="https://americanroutes.s3.amazonaws.com/shows/2404_01.mp3",
         url="http://americanroutes.wwno.org/archives/show/1368/",
     )
@@ -46,7 +60,7 @@ def test_show_details_cache():
     expected = parser.Episode(
         "Making Music on Records & Excavating Shellac",
         description="We're spinning jazz, country, blues, pop and roots music heard locally and globally for over a century on records and later on jukeboxes, in cafes, barrooms and juke joints. We'll hear June Carter and Johnny Cash, New Orleans' jazzmen Kermit Ruffins and Danny Barker, Robert Johnson, and the Rolling Stones...then and now. Plus we'll travel the world from earlier in the 20th century in search of rare music on 78s as dug up by sonic researcher, <b>Jonathan Ward</b>, for his collection, \"Excavated Shellac: An Alternate History of the Worlds Music.\"\n",
-        date=datetime(2024, 1, 24, tzinfo=TZINFO),
+        date=datetime(2024, 1, 24, 1, tzinfo=TZINFO),
         media_url="https://americanroutes.s3.amazonaws.com/shows/2404_01.mp3",
         url="http://americanroutes.wwno.org/archives/show/1368/",
     )
@@ -70,9 +84,10 @@ def test_show_details_fetch(monkeypatch, tmp_path):
     expected = parser.Episode(
         "Making Music on Records & Excavating Shellac",
         description="We're spinning jazz, country, blues, pop and roots music heard locally and globally for over a century on records and later on jukeboxes, in cafes, barrooms and juke joints. We'll hear June Carter and Johnny Cash, New Orleans' jazzmen Kermit Ruffins and Danny Barker, Robert Johnson, and the Rolling Stones...then and now. Plus we'll travel the world from earlier in the 20th century in search of rare music on 78s as dug up by sonic researcher, <b>Jonathan Ward</b>, for his collection, \"Excavated Shellac: An Alternate History of the Worlds Music.\"\n",
-        date=datetime(2024, 1, 24, tzinfo=TZINFO),
+        date=datetime(2024, 1, 24, 1, tzinfo=TZINFO),
         media_url="https://americanroutes.s3.amazonaws.com/shows/2404_01.mp3",
         url="http://americanroutes.wwno.org/archives/show/1368/",
+        media_size_bytes="143878988",
     )
     assert actual == expected
     expected_file = tmp_path / "data" / "show_detail.json"
