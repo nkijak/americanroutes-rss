@@ -65,11 +65,15 @@ def parse_show_details(json, hour: int) -> Episode:
             microsecond=0,
         ),
     )
+    file_url = json.get("abs_file")
+    if file_url.endswith("/"):
+        file_url = f'https://americanroutes.s3.amazonaws.com/shows/{json.get("show_id").replace("-","")}_0{hour}.mp3'
+
     return Episode(
         json.get("title"),
         json.get("description"),
         date,
-        json.get("abs_file"),
+        file_url,
         f'http://americanroutes.wwno.org{json.get("link")}',
         hour,
         json.get("content_length", 0),
