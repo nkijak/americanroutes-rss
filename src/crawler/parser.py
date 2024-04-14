@@ -1,15 +1,22 @@
-import datetime
-import json
+import re
+from datetime import datetime, date
 from dataclasses import dataclass
 from zoneinfo import ZoneInfo
-from typing import List
-from pathlib import Path
+from typing import List, TypeVar, NewType
 
 import requests
 from dateutil.parser import parse as date_parse
-from bs4.element import Tag
 from bs4 import BeautifulSoup
-from tqdm import tqdm
+
+
+BASE = "https://amroutes.org"
+T = TypeVar("T")
+Html = NewType("Html", str)
+Link = NewType("Link", str)
+
+
+def __flatten(matrix: List[List[T]]) -> List[T]:
+    return [item for row in matrix for item in row]
 
 
 # FIXME file length in bytes, reporting as zero even when in files
@@ -17,89 +24,77 @@ from tqdm import tqdm
 class Episode:
     title: str
     description: str
-    date: datetime.date
+    date: date
     media_url: str
     url: str
     hour: int = 1
     media_size_bytes: int = 0
 
 
-def latest_episodes(html: str):
+def __parse_year(html: Html) -> List[Link]:
+    """Parses the {BASE}/{year} page, and returns the URLs to each month's archive page"""
     soup = BeautifulSoup(html, "html.parser")
-    tracks = soup.find("ul", "list-streams").find_all("li")
-    return [t.find("a")["href"] for t in tracks]
+    month_links = [
+        Link(f"{BASE}{mon.parent.get('href')}")
+        for mon in soup.find_all("strong")
+        if mon.parent.get("href")
+    ]
+    return month_links
 
 
-def parse_archive_episode(tag: Tag) -> List[str]:
-    links = tag.find("div", "list-articles").find_all("a", "js-track-loader")
+def parse_month(html: Html) -> List[Link]:
+    soup = BeautifulSoup(html, "html.parser")
     return [
-        f"http://americanroutes.wwno.org/archives/show_data/{id['data-id']}/{hour+1}"
-        for hour, id in enumerate(links)
+        Link(f'{BASE}{details.find("a", "blog-more-link").get("href")}')
+        for details in soup.find_all("div", "blog-item-text")
     ]
 
 
-def parse_detail_links(html: str) -> List[List[str]]:
-    soup = BeautifulSoup(html, "html.parser")
-    return [
-        parse_archive_episode(details)
-        for details in soup.find_all("div", "artist-details")
+def parse_episodes(show_html: Html) -> List[Episode]:
+    soup = BeautifulSoup(show_html, "html.parser")
+    meta = {
+        m.get("property", m.get("itemprop", m.get("name"))): m.get("content")
+        for m in soup.find_all("meta")
+    }
+    media = [
+        {
+            "hour": i + 1,
+            "media_url": div.get("data-url"),
+            "date": date_parse(meta.get("datePublished")).replace(
+                hour=i + 1,
+                minute=0,
+                second=0,
+                microsecond=0,
+                tzinfo=ZoneInfo("America/New_York"),
+            ),
+        }
+        for i, div in enumerate(soup.find_all("div", "sqs-audio-embed"))
     ]
-
-
-def parse_archives(html: str, cachedir: Path) -> List[Episode]:
-    retval = []
-    for links in tqdm(parse_detail_links(html), desc="Details"):
-        hour1, hour2 = links
-        retval.append(show_details(cachedir, hour1, 1))
-        retval.append(show_details(cachedir, hour2, 2))
-    return retval
-
-
-def parse_show_details(json, hour: int) -> Episode:
-    date = date_parse(
-        json.get("date"),
-        default=datetime.datetime.now(tz=ZoneInfo("America/New_York")).replace(
-            hour=hour,
-            minute=0,
-            second=0,
-            microsecond=0,
+    params = {
+        # drop the end, python style
+        "title": meta.get("headline", "headline missing").replace("\xa0", " "),
+        "description": re.sub(
+            r"\s+",
+            " ",
+            meta.get("description", "description missing").replace("\n", ""),
         ),
-    )
-    file_url = json.get("abs_file")
-    if file_url.endswith("/"):
-        file_url = f'https://americanroutes.s3.amazonaws.com/shows/{json.get("show_id").replace("-","")}_0{hour}.mp3'
-
-    return Episode(
-        json.get("title"),
-        json.get("description"),
-        date,
-        file_url,
-        f'http://americanroutes.wwno.org{json.get("link")}',
-        hour,
-        json.get("content_length", 0),
-    )
+        "url": meta.get("url"),
+    }
+    return [Episode(**{**m, **p}) for m, p in zip(media, [params, params])]
 
 
-def get_size(abs_file_url: str | None) -> int:
-    if not abs_file_url:
-        return 0
-    resp = requests.head(abs_file_url)
-    return resp.headers.get("Content-Length", 0)
+def __fetch_content(links: List[Link]) -> List[Html]:
+    return [Html(str(requests.get(link).content, "utf-8")) for link in links]
 
 
-def show_details(cachedir: Path, show_url: str, hour: int) -> Episode:
-    host, show_path = show_url.split("archives/")
-    show_file = cachedir / show_path
-    if show_file.exists():
-        with open(show_file) as raw:
-            details = json.load(raw)
+def pipeline(start_year: int = 2024) -> List[Episode]:
+    years = range(start_year, datetime.now().year + 1)
+    year_pages: List[Html] = __fetch_content([Link(f"{BASE}/{y}") for y in years])
 
-    else:
-        response = requests.get(show_url)
-        response.raise_for_status()
-        details = response.json()
-        show_file.parent.mkdir(parents=True, exist_ok=True)
-        details["content_length"] = get_size(details.get("abs_file"))
-        with open(show_file, "w") as out:
-            json.dump(details, out)
-    return parse_show_details(details, hour)
+    month_links: List[Link] = __flatten([__parse_year(page) for page in year_pages])
+    month_pages: List[Html] = __fetch_content(month_links)
+
+    show_links: List[Link] = __flatten([parse_month(page) for page in month_pages])
+    show_pages: List[Html] = __fetch_content(show_links)
+
+    return __flatten([parse_episodes(page) for page in show_pages])

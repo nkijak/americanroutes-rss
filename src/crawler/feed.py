@@ -1,9 +1,7 @@
 from typing import List
 from pathlib import Path
-from datetime import datetime
 
 import requests
-from dateutil.rrule import rrule, MONTHLY
 from tqdm import tqdm
 
 
@@ -49,15 +47,8 @@ The songs and stories on American Routes describe both the community origins of 
 
 
 if __name__ == "__main__":
-    months = [
-        dt for dt in rrule(MONTHLY, dtstart=datetime(2024, 1, 1), until=datetime.now())
-    ]
-
-    urls = [
-        f"http://americanroutes.wwno.org/archives/for_date/{m.strftime('%Y-%m')}"
-        for m in months
-    ]
     episodes: List[Episode] = []
+    urls = get_year_pages(since=2024)
     for url in tqdm(urls, desc="Archives"):
         html = str(requests.get(url).content, "utf-8")
         episodes += reversed(parse_archives(html, Path("target")))
