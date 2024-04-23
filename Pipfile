@@ -30,5 +30,6 @@ mypy = "*"
 unknown = {file = ".", editable = true}
 tqdm = "*"
 requests-cache = "*"
+exceptiongroup = "*"
 
 [dev-packages]
