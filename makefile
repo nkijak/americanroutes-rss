@@ -7,6 +7,7 @@ init:
 	pipenv install
 
 target/rss.xml: src/crawler/feed.py src/crawler/parser.py
+	mkdir -p target
 	${BIN}python src/crawler/feed.py
 
 clean:
