@@ -1,20 +1,23 @@
 import re
 import logging
 import time
-from datetime import datetime, date
+
+from datetime import datetime
 from dataclasses import dataclass
 from zoneinfo import ZoneInfo
 from typing import List, TypeVar, NewType
 from requests_cache import CachedSession
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
-
-from tqdm import tqdm
-from dateutil.parser import parse as date_parse
 from bs4 import BeautifulSoup
+from tqdm import tqdm
+
+from dateutil.parser import parse as date_parse
 
 
 BASE = "https://amroutes.org"
+OLD_GUID = "https://americanroutes.s3.amazonaws.com/shows/{show_id}.mp3"
+
 T = TypeVar("T")
 Html = NewType("Html", str)
 Link = NewType("Link", str)
@@ -31,11 +34,25 @@ def __flatten(matrix: List[List[T]]) -> List[T]:
 class Episode:
     title: str
     description: str
-    date: date
+    date: datetime
     media_url: str
     url: str
     hour: int = 1
     media_size_bytes: int = 0
+
+    def guid(self):
+        show_id_hour = self.media_url.split("/")[-1][:-4]
+        if self.date < datetime(
+            year=2024,
+            month=2,
+            day=22,
+            hour=0,
+            minute=0,
+            tzinfo=ZoneInfo("America/New_York"),
+        ):
+            return OLD_GUID.format(show_id=show_id_hour)
+        else:
+            return show_id_hour
 
 
 def __parse_year(html: Html) -> List[Link]:
@@ -94,7 +111,7 @@ def __fetch_content(links: List[Link]) -> List[Html]:
     time.sleep(1)
     retry_strategy = Retry(total=4, status_forcelist=[429], backoff_factor=2)
     adapter = HTTPAdapter(max_retries=retry_strategy)
-    session = CachedSession("demo_cache", use_cache_dir=True, cache_control=True)
+    session = CachedSession("cachedir", backend="filesystem", cache_control=True)
     session.mount("https://", adapter)
     session.mount("http://", adapter)
 

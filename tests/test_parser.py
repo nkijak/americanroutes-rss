@@ -59,6 +59,19 @@ def test_parse_episodes():
     ]
 
 
+def test_old_guid_generation():
+    eps = parser.Episode(
+        "title",
+        description="whatever",
+        date=datetime(2024, 2, 21, 2, tzinfo=TZINFO),
+        media_url="https://static1.squarespace.com/static/6608b67820a1e41cb804e883/t/661463743c3afb2d49e2c0d4/1712612330757/2413_02.mp3/original/2413_02.mp3",
+        url="whatever",
+        hour=2,
+    )
+    expected = "https://americanroutes.s3.amazonaws.com/shows/2413_02.mp3"
+    assert eps.guid() == expected
+
+
 # TODO test caching of fetch method
 @pytest.mark.skip("Replace this with __fetch_content cache test")
 def test_show_details_cache():

@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           key: show-details
-          path: "target/show_data"
+          path: "cachedir"
 
       - name: build
         run: make init docker-build BIN="pipenv run "
@@ -26,7 +26,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           key: ${{ steps.restore-detail-files.outputs.cache-primary-key }}
-          path: "target/show_data"
+          path: "cachedir"
 
       - name: Connect Tailscale
         uses: tailscale/github-action@v2

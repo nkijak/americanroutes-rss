@@ -16,6 +16,7 @@ def episodeToFeedEntry(episode: Episode, entry):
     entry.link(href=episode.url)
     entry.published(episode.date)
     entry.description(episode.description)
+    entry.guid(episode.guid())
 
 
 def generate(episodes: List[Episode]):
