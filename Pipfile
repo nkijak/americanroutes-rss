@@ -29,6 +29,6 @@ types-beautifulsoup4 = "*"
 mypy = "*"
 unknown = {file = ".", editable = true}
 tqdm = "*"
+requests-cache = "*"
 
 [dev-packages]
-

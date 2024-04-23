@@ -1,10 +1,15 @@
 import re
+import logging
+import time
 from datetime import datetime, date
 from dataclasses import dataclass
 from zoneinfo import ZoneInfo
 from typing import List, TypeVar, NewType
+from requests_cache import CachedSession
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
-import requests
+from tqdm import tqdm
 from dateutil.parser import parse as date_parse
 from bs4 import BeautifulSoup
 
@@ -13,6 +18,8 @@ BASE = "https://amroutes.org"
 T = TypeVar("T")
 Html = NewType("Html", str)
 Link = NewType("Link", str)
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def __flatten(matrix: List[List[T]]) -> List[T]:
@@ -84,7 +91,23 @@ def parse_episodes(show_html: Html) -> List[Episode]:
 
 
 def __fetch_content(links: List[Link]) -> List[Html]:
-    return [Html(str(requests.get(link).content, "utf-8")) for link in links]
+    time.sleep(1)
+    retry_strategy = Retry(total=4, status_forcelist=[429], backoff_factor=2)
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session = CachedSession("demo_cache", use_cache_dir=True, cache_control=True)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+
+    bodies = []
+    for link in tqdm(links):
+        response = session.get(
+            link,
+            headers={
+                "User-Agent": "Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion"
+            },
+        )
+        bodies.append(Html(str(response.content, "utf-8")))
+    return bodies
 
 
 def pipeline(start_year: int = 2024) -> List[Episode]:

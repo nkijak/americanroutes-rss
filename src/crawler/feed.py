@@ -1,14 +1,10 @@
 from typing import List
-from pathlib import Path
-
-import requests
-from tqdm import tqdm
 
 
 # import boto3
 
 from feedgen.feed import FeedGenerator
-from crawler.parser import Episode, parse_archives
+from crawler.parser import Episode, pipeline
 
 BUCKETNAME = "americanroutes"
 
@@ -47,9 +43,5 @@ The songs and stories on American Routes describe both the community origins of 
 
 
 if __name__ == "__main__":
-    episodes: List[Episode] = []
-    urls = get_year_pages(since=2024)
-    for url in tqdm(urls, desc="Archives"):
-        html = str(requests.get(url).content, "utf-8")
-        episodes += reversed(parse_archives(html, Path("target")))
+    episodes: List[Episode] = pipeline()
     generate(episodes)
