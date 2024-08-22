@@ -15,7 +15,7 @@ from tqdm import tqdm
 from dateutil.parser import parse as date_parse
 
 
-BASE = "https://amroutes.org"
+BASE = "https://www.amroutes.org"
 OLD_GUID = "https://americanroutes.s3.amazonaws.com/shows/{show_id}.mp3"
 
 T = TypeVar("T")
