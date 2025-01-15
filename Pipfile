@@ -22,7 +22,7 @@ types-requests = "*"
 types-python-dateutil = "*"
 types-beautifulsoup4 = "*"
 mypy = "*"
-unknown = {file = ".", editable = true}
+#unknown = {file = ".", editable = true}
 tqdm = "*"
 requests-cache = "*"
 exceptiongroup = "*"
