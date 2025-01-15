@@ -22,7 +22,6 @@ types-requests = "*"
 types-python-dateutil = "*"
 types-beautifulsoup4 = "*"
 mypy = "*"
-#unknown = {file = ".", editable = true}
 tqdm = "*"
 requests-cache = "*"
 exceptiongroup = "*"
@@ -31,5 +30,6 @@ lxml = "~=5.3.0"
 idna = "~=3.7"
 urllib3 = "~=1.26.19"
 certifi = "~=2024.07.04"
+crawler = {file = ".", editable = true}
 
 [dev-packages]

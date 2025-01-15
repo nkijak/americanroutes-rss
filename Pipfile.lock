@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "271ffcc89d6017ca3d570dde1eca6c6837eee5a206f235c2e7b19dcf5ed2ddc9"
+            "sha256": "5d53d7feb5b349bdb163ac3c86cfa89975ec868087efd921ce2c72c0fea71b66"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -140,7 +140,8 @@
             "version": "==0.4.6"
         },
         "crawler": {
-            "version": "==0.0.0"
+            "editable": true,
+            "file": "."
         },
         "docopt": {
             "hashes": [
