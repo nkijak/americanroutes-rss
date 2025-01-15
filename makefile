@@ -17,7 +17,9 @@ serve: target/rss.xml
 	cd target && ${BIN}python -m http.server
 
 docker-build: target/rss.xml
-	docker build -t ${IMAGE}:${TAG} .
+	docker build \
+		--platform=linux/amd64 \
+		-t ${IMAGE}:${TAG} .
 
 docker-run:
 	docker run --rm -p 8080:80 ${IMAGE}:${TAG}
